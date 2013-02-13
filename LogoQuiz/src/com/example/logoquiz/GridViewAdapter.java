@@ -19,12 +19,14 @@ public class GridViewAdapter extends ArrayAdapter<Logo> {
 	Context context;
 	int resource;
 	List<Logo> data;
+	int imageHieght;
 	
-	public GridViewAdapter(Context context, int resource,List<Logo> data) {
+	public GridViewAdapter(Context context, int resource,List<Logo> data,int imageHieght) {
 		super(context, resource, data);
 		this.context = context;
 		this.resource = resource;
 		this.data = data;
+		this.imageHieght = imageHieght;
 		//Log.v("Andy", "Constructor called");
 	}
 	
@@ -40,7 +42,7 @@ public class GridViewAdapter extends ArrayAdapter<Logo> {
 			holder = new Holder();
 			holder.img = (ImageView) convertView.findViewById(R.id.logoImage);
 			holder.logoName = (TextView) ((Activity)context).findViewById(R.id.logoName);
-			holder.img.getLayoutParams().height = 90;
+			holder.img.getLayoutParams().height = imageHieght;
 			
 			//Log.v("Andy", "Got Reference of imgaeview");
 			convertView.setTag(holder);

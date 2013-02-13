@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -118,8 +119,20 @@ public class Main extends Activity {
 		questionsAnswersSoFar = new ArrayList<Integer>();
 		
 		setupQue();
+
 		
-		adapter = new GridViewAdapter(this,R.layout.cel_content, logoListToDisp );
+		DisplayMetrics metrics = new DisplayMetrics();
+		this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		int screenHeight = metrics.heightPixels;
+		int imageHieght = (screenHeight - 60); //remove space for androidbar, appbar and logoname textview
+		imageHieght = (int)(imageHieght / 4); //as 4 rows will be displayed
+		imageHieght = imageHieght - 10; //removing additional padding space
+
+		Log.v(LogoQuizApp.DEBUG_TAG, "hiegth:" + metrics.heightPixels);
+		Log.v(LogoQuizApp.DEBUG_TAG, "image:" + imageHieght);
+
+		
+		adapter = new GridViewAdapter(this,R.layout.cel_content, logoListToDisp ,imageHieght );
 		gv.setAdapter(adapter);
 		
 		
